@@ -9,6 +9,8 @@ scale_generalization/
 .vscode/
 
 
+*.pyc
+
 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
 [user]
 	name = taohan10200
