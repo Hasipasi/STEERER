@@ -1,5 +1,5 @@
 # created by virtualenv automatically
-/__pycache__/*
+**/__pycache__/
 *.o
 *.e
 *.out
@@ -9,7 +9,9 @@ scale_generalization/
 .vscode/
 
 
+**/*.pyc
 *.pyc
+
 
 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
 [user]
