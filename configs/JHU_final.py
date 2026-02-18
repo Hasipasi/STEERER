@@ -1,4 +1,7 @@
-gpus = (0, 1,)
+import os
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128"
+
+gpus = (0,)  # Fixed: must be a tuple
 log_dir = 'exp'
 workers = 6
 print_freq = 30
@@ -28,7 +31,7 @@ network = dict(
 dataset = dict(
     name='JHU',
     root='../ProcessedData/JHU/',
-    test_set='test_val.txt',
+    test_set='test.txt',  # Changed from test_val.txt to just test.txt (1600 vs 2101 images)
     train_set='train.txt',
     loc_gt = 'test_gt_loc.txt',
     num_classes=len(network['resolution_num']),
@@ -90,12 +93,12 @@ train = dict(
 
 
 test = dict(
-    image_size=(1024, 2048),  # height, width
+    image_size=(384, 512),  # height, width (reduced even more for GPU memory)
     base_size=None,
     loc_base_size=None,
     loc_threshold = 0.10 ,
     batch_size_per_gpu=1,
-    patch_batch_size=16,
+    patch_batch_size=1,  # minimum value
     flip_test=False,
     multi_scale=False,
     model_file= '',

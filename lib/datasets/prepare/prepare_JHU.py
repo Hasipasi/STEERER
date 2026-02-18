@@ -10,8 +10,8 @@ import glob
 from functions import euclidean_dist,  generate_cycle_mask, average_del_min
 cycle = False
 
-Root = '~/JHU'
-dst_Root = '~/JHU'
+Root = '/home/bodis/data/jhu_crowd_v2.0'
+dst_Root = '/home/bodis/ProcessedData/JHU'
 
 
 
@@ -35,7 +35,7 @@ def resize_images(mode):
     imgs_path = os.path.join(Root, mode, 'images')
     gt_path = os.path.join(Root, mode, 'gt')
     mni_size = (1024, 768)
-    file_list = os.listdir(imgs_path)
+    file_list = [f for f in os.listdir(imgs_path) if f.endswith('.jpg')]
     print(len(file_list))
     for imgName in file_list:
         img_id = imgName.split('.')[0]
@@ -356,18 +356,18 @@ def JHU_list_make(mode):
 
 if __name__ == '__main__':
     #================1. resize images and gt===================
-    resize_images('train')
-    resize_images('val')
-    resize_images('test')
+    # resize_images('train')
+    # resize_images('val')
+    # resize_images('test')
 
     # # ================2. masks==================
     # generate_masks()
 
     # ================3. train test val id==================
-    JHU_list_make('test')
-    JHU_list_make('val')
-    JHU_list_make('train')
+    # JHU_list_make('test')
+    # JHU_list_make('val')
+    # JHU_list_make('train')
 
-    # # ================4. generate val_loc_gt.txt and test_loc_gt.txt==================
-    # loc_gt_make(mode = 'test')
-    # loc_gt_make(mode='val')
+    # ================4. generate val_loc_gt.txt and test_loc_gt.txt==================
+    loc_gt_make(mode = 'test')
+    loc_gt_make(mode='val')
